@@ -4,9 +4,9 @@
 Kodi developers one stop shop for common account information accessed under one roof that all addons can share.  This allows users to setup accounts once and addons access that data.
 ```
 <dir>
-    <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.myaccounts/master/zips/addons.xml</info>
-    <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.myaccounts/master/zips/addons.xml.md5</checksum>
-    <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.myaccounts/master/zips/</datadir>
+    <info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml</info>
+    <checksum>https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml.md5</checksum>
+    <datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/</datadir>
 </dir>
 ```
 
