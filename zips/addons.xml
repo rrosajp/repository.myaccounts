@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="script.module.myaccounts" version="1.0.1" name="My Accounts" provider-name="Venom, Fen">
+<addon id="script.module.myaccounts" version="1.0.2" name="My Accounts" provider-name="Venom, Fen">
 	<requires>
 		<import addon="xbmc.python" version="2.14.0" />
 		<import addon="script.module.requests" version="2.19.1" />
