@@ -172,6 +172,7 @@ class RealDebrid:
 			log_utils.error()
 			return False
 
+
 	def get_token(self):
 		try:
 			url = oauth_base_url + 'token'

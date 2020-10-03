@@ -134,3 +134,9 @@ def traktRefreshToken():
 def realdebridRefreshToken():
 	from modules.realdebrid import RealDebrid
 	RealDebrid().refresh_token()
+
+def openMASettings(query=None):
+	control.openSettings(query)
+	while not control.condVisibility('Window.IsVisible(addonsettings)'):
+		control.sleep(250)
+	control.release_active_monitor()

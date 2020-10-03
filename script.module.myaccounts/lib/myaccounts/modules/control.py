@@ -25,6 +25,7 @@ getLangString = xbmcaddon.Addon().getLocalizedString
 condVisibility = xbmc.getCondVisibility
 execute = xbmc.executebuiltin
 jsonrpc = xbmc.executeJSONRPC
+window = xbmcgui.Window(10000)
 monitor = xbmc.Monitor()
 
 dialog = xbmcgui.Dialog()
@@ -172,3 +173,21 @@ def jsondate_to_datetime(jsondate_object, resformat, remove_time=False):
 		try: datetime_object = datetime.strptime(jsondate_object, resformat)
 		except TypeError: datetime_object = datetime(*(time.strptime(jsondate_object, resformat)[0:6]))
 	return datetime_object
+
+
+def set_active_monitor():
+	window.setProperty('myaccounts.active', 'true')
+
+
+def release_active_monitor():
+	window.clearProperty('myaccounts.active')
+
+
+def function_monitor(func, query='0.0'):
+	func()
+	sleep(100)
+	openSettings(query)
+	while not condVisibility('Window.IsVisible(addonsettings)'):
+		sleep(250)
+	sleep(100)
+	release_active_monitor()
