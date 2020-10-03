@@ -26,8 +26,8 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Initial Release - v1.0.1 – Sept. 21, 2020[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Kick off release.[/I]
+[B][COLOR red]v1.0.3 – Oct. 3, 2020[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Fix for settings not saving correctly.[/I]
 		</news>
 	</extension>
 </addon>
