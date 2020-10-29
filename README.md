@@ -60,7 +60,7 @@ Returns all debrid account information supported (currently All-Debrid, Premiumi
 `imdb': {'user': ''}`
 
 ### getAllScraper()
-`{'ororo': {'password': '', 'email': ''}, 'filepursuit': {'api_key': ''}, 'easyNews': {'username': '', 'password': ''}, 'furk': {'username': '', 'api_key': '', 'password': ''}}`
+`{'ororo': {'password': '', 'email': ''}, 'filepursuit': {'api_key': ''}, 'easyNews': {'username': '', 'password': ''}, 'furk': {'username': '', 'api_key': '', 'password': ''}, 'gdrive': {'url': ''}}`
 
 ### getFilepursuit()
 `filepursuit: {'api_key': ''}`
