@@ -24,7 +24,7 @@ You can use `import myaccounts` once the dependency is added to your addon.  The
 This function call will provide all available accounts as a dictionary for each account handled.  If we called `accounts = myaccounts.getAll()` The returned data will be as follows.
 `accounts ={'premiumize': {username': '', 'token': ''}, 'alldebrid': {'username': '', 'token': ''}, 'tmdb': {'username': '', 'password': '', 'api_key': '', 'session_id': ''},
 	'realdebrid': {'username': '', 'token': '', 'secret': '', 'refresh': '', 'client_id': ''}, 'ororo': {'password': '', 'email': ''}, 'tvdb': {'api_key': ''}, 'filepursuit': {'api_key': ''},
-	'trakt': {'username': '', 'token': '', 'expires': '', 'refresh': ''}, 'imdb': {'user': ''}, 'easyNews': {'username': '', 'password': ''}, 'furk': {'username': '', 'api_key': '', 'password': ''},
+	'trakt': {'username': '', 'token': '', 'expires': '', 'refresh': ''}, 'imdb': {'user': ''}, 'easyNews': {'username': '', 'password': ''}, 'gdrive': {'url': ''}, 'furk': {'username': '', 'api_key': '', 'password': ''},
 	'fanart_tv': {'api_key': ''}}`
 
 ### myaccount.getTrakt()
@@ -70,6 +70,9 @@ Returns all debrid account information supported (currently All-Debrid, Premiumi
 
 ### myaccount.getEasyNews()
 `easyNews: {'username': '', 'password': ''}`
+
+### myaccount.getGDrive()
+`gdrive: {'url': ''}`
 
 ### myaccount.getOrro()
 `ororo: {'password': '', 'email': ''}`
