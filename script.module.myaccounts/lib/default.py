@@ -95,3 +95,6 @@ elif action == 'ShowChangelog':
 elif action == 'ShowHelp':
 	from myaccounts.help import help
 	help.get(params.get('name'))
+
+elif action == 'ShowOKDialog':
+	control.okDialog(params.get('title', 'default'), int(params.get('message', '')))

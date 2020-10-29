@@ -1,2 +1,12 @@
+[B][COLOR red]v1.0.4 – Oct. 29, 2020[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Added Google Drive scraper url setup.[/I]
+
+[B][COLOR red]v1.0.3 – Oct. 3, 2020[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Fix for settings not saving correctly.[/I]
+
+[B][COLOR red]v1.0.2 – Sept. 28, 2020[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Dutch translations with many thanks to TINUZ97![/I]
+[COLOR yellow]--[/COLOR][I] Other needed fixes.[/I]
+
 [B][COLOR red]Initial Release - v1.0.1 – Sept. 21, 2020[/COLOR][/B]
 [COLOR yellow]--[/COLOR][I] Kick off release.[/I]

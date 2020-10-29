@@ -96,8 +96,9 @@ def getIMDb():
 def getAllScraper():
 	dict1 = dict(getFilepursuit(), **getFurk())
 	dict2 = dict(dict1, **getEasyNews())
-	dict3 = dict(dict2, **getOrro())
-	return dict3
+	dict3 = dict(dict2, **getGDrive())
+	dict4 = dict(dict3, **getOrro())
+	return dict4
 
 
 def getFilepursuit():
@@ -121,19 +122,28 @@ def getEasyNews():
 	return easyNews
 
 
+def getGDrive():
+	gdrive = {'gdrive': {}}
+	gdrive['gdrive']['url'] = control.setting('gdrive.cloudflare_url')
+	return gdrive
+
+
 def getOrro():
 	ororo = {'ororo': {}}
 	ororo['ororo']['email'] = control.setting('ororo.email')
 	ororo['ororo']['password'] = control.setting('ororo.password')
 	return ororo
 
+
 def traktRefreshToken():
 	from modules.trakt import Trakt
 	Trakt().refresh_token()
 
+
 def realdebridRefreshToken():
 	from modules.realdebrid import RealDebrid
 	RealDebrid().refresh_token()
+
 
 def openMASettings(query=None):
 	control.openSettings(query)

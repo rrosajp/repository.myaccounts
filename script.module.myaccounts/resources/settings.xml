@@ -6,9 +6,9 @@
 		<setting id="trakt.token" type="text" visible="false" label="" default="" />
 		<setting id="trakt.username" type="text" default="" label="40062" enable="false" visible="!eq(-1,)" />
 		<setting type="action" label="32316" action="RunScript(script.module.myaccounts, action=traktAcct)" visible="!eq(-2,)" />
-		<setting type="action" label="32306" action="RunScript(script.module.myaccounts, action=traktAuth)" visible="eq(-3,)" />
-		<setting type="action" label="32317" action="RunScript(script.module.myaccounts, action=traktRevoke)" visible="!eq(-4,)" />
-		<setting id="trakt.refresh" type="text" visible="flase" label="" default="" />
+		<setting type="action" label="32306" option="close" action="RunScript(script.module.myaccounts, action=traktAuth)" visible="eq(-3,)" />
+		<setting type="action" label="32317" option="close" action="RunScript(script.module.myaccounts, action=traktRevoke)" visible="!eq(-4,)" />
+		<setting id="trakt.refresh" type="text" visible="false" label="" default="" />
 		<setting id="trakt.expires" type="text" visible="false" label="" default="" />
 	</category>
 
@@ -19,22 +19,22 @@
 		<setting id="alldebrid.token" label="40077" type="text" default="" visible="false" />
 		<setting id="alldebrid.username" label="32318" type="text" default="" visible="!eq(-1,)" enable="false" />
 		<setting type="action" label="32316" action="RunScript(script.module.myaccounts, action=alldebridAcct)" visible="!eq(-2,)" />
-		<setting type="action" label="32319" action="RunScript(script.module.myaccounts, action=alldebridAuth)" visible="eq(-3,)" />
-		<setting type="action" label="32317" action="RunScript(script.module.myaccounts, action=alldebridRevoke)" visible="!eq(-4,)" />
+		<setting type="action" label="32319" option="close" action="RunScript(script.module.myaccounts, action=alldebridAuth)" visible="eq(-3,)" />
+		<setting type="action" label="32317" option="close" action="RunScript(script.module.myaccounts, action=alldebridRevoke)" visible="!eq(-4,)" />
 
 		<setting type="lsep" label="40057" />
 		<setting id="premiumize.token" label="40078" type="text" default="" visible="false" />
 		<setting id="premiumize.username" label="32318" type="text" default="" visible="!eq(-1,)" enable="false" />
 		<setting type="action" label="32316" action="RunScript(script.module.myaccounts, action=premiumizeAcct)" visible="!eq(-2,)" />
-		<setting type="action" label="32319" action="RunScript(script.module.myaccounts, action=premiumizeAuth)" visible="eq(-3,)" />
-		<setting type="action" label="32317" action="RunScript(script.module.myaccounts, action=premiumizeRevoke)" visible="!eq(-4,)" />
+		<setting type="action" label="32319" option="close" action="RunScript(script.module.myaccounts, action=premiumizeAuth)" visible="eq(-3,)" />
+		<setting type="action" label="32317" option="close" action="RunScript(script.module.myaccounts, action=premiumizeRevoke)" visible="!eq(-4,)" />
 
 		<setting type="lsep" label="40058" />
 		<setting id="realdebrid.token" label="40079" type="text" default="" visible="false" />
 		<setting id="realdebrid.username" label="32318" type="text" default="" visible="!eq(-1,)" enable="false" />
 		<setting type="action" label="32316" action="RunScript(script.module.myaccounts, action=realdebridAcct)" visible="!eq(-2,)" />
-		<setting type="action" label="32319" action="RunScript(script.module.myaccounts, action=realdebridAuth)" visible="eq(-3,)" />
-		<setting type="action" label="32317" action="RunScript(script.module.myaccounts, action=realdebridRevoke)" visible="!eq(-4,)" />
+		<setting type="action" label="32319" option="close" action="RunScript(script.module.myaccounts, action=realdebridAuth)" visible="eq(-3,)" />
+		<setting type="action" label="32317" option="close" action="RunScript(script.module.myaccounts, action=realdebridRevoke)" visible="!eq(-4,)" />
 		<setting id="realdebrid.client_id" label="realdebrid client_id" type="text" default="" visible="false" />
 		<setting id="realdebrid.refresh" label="realdebrid refresh" type = "text" default="" visible="false" />
 		<setting id="realdebrid.secret" label="realdebrid secret" type = "text" default="" visible="false" />
@@ -52,8 +52,8 @@
 		<setting id="tmdb.password" type="text" label="40061" default="" />
 		<setting label="32311" type="action" action="RunScript(script.module.myaccounts, action=ShowHelp, name=tmdbUser)" />
 		<setting id="tmdb.session_id" type="text" default="" label="session_id" enable="false" />
-		<setting type="action" label="32312" action="RunScript(script.module.myaccounts, action=tmdbAuth, opensettings=true)" visible="eq(-1,)" />
-		<setting type="action" label="32321" action="RunScript(script.module.myaccounts, action=tmdbRevoke, opensettings=true)" visible="!eq(-2,)" />
+		<setting type="action" label="32312" option="close" action="RunScript(script.module.myaccounts, action=tmdbAuth, opensettings=true)" visible="eq(-1,)" />
+		<setting type="action" label="32321" option="close" action="RunScript(script.module.myaccounts, action=tmdbRevoke, opensettings=true)" visible="!eq(-2,)" />
 
 		<setting type="lsep" label="32322" />
 		<setting id="tvdb.api.key" type="select" label="32323" lvalues="32369|32370|32371" default="0" />
@@ -78,6 +78,10 @@
 		<setting type="lsep" label="32334" />
 		<setting id="easynews.username" type="text" label="32335" default="" />
 		<setting id="easynews.password" type="text" label="32336" default="" />
+
+		<setting type="lsep" label="40082" />
+		<setting label="40085" type="action" action="RunScript(script.module.myaccounts, action=ShowOKDialog, message=40084)" />
+		<setting id="gdrive.cloudflare_url" type="text" label="40083" default="" />
 
 		<setting type="lsep" label="32337" />
 		<setting id="ororo.email" type="text" label="32338" default="" />
