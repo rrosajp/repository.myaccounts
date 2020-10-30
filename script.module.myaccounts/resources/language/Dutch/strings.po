@@ -381,5 +381,21 @@ msgctxt "#40081"
 msgid "Authorization Successful"
 msgstr "Autorisatie Succesvol"
 
+msgctxt "#40082"
+msgid "GDRIVE"
+msgstr "GDRIVE"
+
+msgctxt "#40083"
+msgid "GDrive Worker URL"
+msgstr "GDrive Worker URL"
+
+msgctxt "#40084"
+msgid "To generate a GDrive Worker URL, go to  [B]https://gdrive-cfworker.glitch.me/[/B]  and follow the instructions."
+msgstr "Om een ​​GDrive Worker URL te genereren, ga naar [B]https://gdrive-cfworker.glitch.me/[/B] en volg de instructies."
+
+msgctxt "#40085"
+msgid "Setup"
+msgstr "Configuratie"
+
 
 
