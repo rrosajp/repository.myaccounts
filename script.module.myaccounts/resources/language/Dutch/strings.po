@@ -397,5 +397,7 @@ msgctxt "#40085"
 msgid "Setup"
 msgstr "Configuratie"
 
-
+msgctxt "#40086"
+msgid "Account Expiry Notification"
+msgstr "Account Verlopen Notificatie"
 
