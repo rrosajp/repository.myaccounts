@@ -39,36 +39,38 @@ class PremAccntNotification:
 		from myaccounts.modules import alldebrid
 		from myaccounts.modules import premiumize
 		from myaccounts.modules import realdebrid
-
 		xbmc.log('[ script.module.myaccounts ]  Debrid Account Expiry Notification Service Starting...', 2)
 		self.duration = [(15, 10), (11, 7), (8, 4), (5, 2), (3, 0)]
 		if control.setting('alldebrid.username') != '' and control.setting('alldebrid.expiry.notice') == 'true':
 			account_info = alldebrid.AllDebrid().account_info()['user']
-			if not account_info['isSubscribed']:
-				log_utils.log('AD account_info = %s' % account_info, log_utils.LOGNOTICE)
-				expires = datetime.fromtimestamp(account_info['premiumUntil'])
-				days_remaining = (expires - datetime.today()).days # int
-				if self.withinRangeCheck('alldebrid', days_remaining):
-					control.notification(message='AllDebrid Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'alldebrid.png'))
+			if account_info:
+				if not account_info['isSubscribed']:
+					# log_utils.log('AD account_info = %s' % account_info, log_utils.LOGNOTICE)
+					expires = datetime.fromtimestamp(account_info['premiumUntil'])
+					days_remaining = (expires - datetime.today()).days # int
+					if self.withinRangeCheck('alldebrid', days_remaining):
+						control.notification(message='AllDebrid Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'alldebrid.png'))
 
 		if control.setting('premiumize.username') != '' and control.setting('premiumize.expiry.notice') == 'true':
 			account_info = premiumize.Premiumize().account_info()
-			log_utils.log('PM account_info = %s' % account_info, log_utils.LOGNOTICE)
-			expires = datetime.fromtimestamp(account_info['premium_until'])
-			days_remaining = (expires - datetime.today()).days # int
-			if self.withinRangeCheck('premiumize', days_remaining):
-				control.notification(message='Premiumize.me Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'premiumize.png'))
+			if account_info:
+				# log_utils.log('PM account_info = %s' % account_info, log_utils.LOGNOTICE)
+				expires = datetime.fromtimestamp(account_info['premium_until'])
+				days_remaining = (expires - datetime.today()).days # int
+				if self.withinRangeCheck('premiumize', days_remaining):
+					control.notification(message='Premiumize.me Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'premiumize.png'))
 
 		if control.setting('realdebrid.username') != '' and control.setting('realdebrid.expiry.notice') == 'true':
-			import time
 			account_info = realdebrid.RealDebrid().account_info()
-			log_utils.log('RD account_info = %s' % account_info, log_utils.LOGNOTICE)
-			FormatDateTime = "%Y-%m-%dT%H:%M:%S.%fZ"
-			try: expires = datetime.strptime(account_info['expiration'], FormatDateTime)
-			except: expires = datetime(*(time.strptime(account_info['expiration'], FormatDateTime)[0:6]))
-			days_remaining = (expires - datetime.today()).days # int
-			if self.withinRangeCheck('realdebrid', days_remaining):
-				control.notification(message='Real-Debrid Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'realdebrid.png'))
+			if account_info:
+				import time
+				# log_utils.log('RD account_info = %s' % account_info, log_utils.LOGNOTICE)
+				FormatDateTime = "%Y-%m-%dT%H:%M:%S.%fZ"
+				try: expires = datetime.strptime(account_info['expiration'], FormatDateTime)
+				except: expires = datetime(*(time.strptime(account_info['expiration'], FormatDateTime)[0:6]))
+				days_remaining = (expires - datetime.today()).days # int
+				if self.withinRangeCheck('realdebrid', days_remaining):
+					control.notification(message='Real-Debrid Account expires in %s days' % days_remaining, icon=control.joinPath(control.artPath(), 'realdebrid.png'))
 
 	def withinRangeCheck(self, debrid_provider, days_remaining):
 		if days_remaining < 15:
