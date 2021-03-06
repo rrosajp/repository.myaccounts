@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import requests
 import time
@@ -143,7 +142,7 @@ class Trakt():
 		control.setSetting('trakt.refresh', '')
 		control.notification(title='default', message=40009, icon=trakt_icon)
 
-	
+
 	def account_info(self):
 		response = self.call("users/me", with_auth=True)
 		return response
@@ -190,4 +189,3 @@ class Trakt():
 		except:
 			log_utils.error()
 			return
-

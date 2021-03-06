@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 '''
 	My Accounts
 '''
@@ -77,11 +76,10 @@ def getTMDb():
 
 def getTVDb():
 	tvdb = {'tvdb': {}}
-	# keys must be .decode('base64') by addon to use
 	tvdb_key_list = [
-		'MDZjZmYzMDY5MGY5Yjk2MjI5NTcwNDRmMjE1OWZmYWU=',
-		'MUQ2MkYyRjkwMDMwQzQ0NA==',
-		'N1I4U1paWDkwVUE5WU1CVQ==']
+		'06cff30690f9b9622957044f2159ffae',
+		'1D62F2F90030C444',
+		'7R8SZZX90UA9YMBU']
 	api_key = tvdb_key_list[int(control.setting('tvdb.api.key'))]
 	tvdb['tvdb']['api_key'] = api_key
 	return tvdb

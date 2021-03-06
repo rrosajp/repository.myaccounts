@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 
 import requests
@@ -24,8 +23,7 @@ class AllDebrid:
 	def _get(self, url, url_append=''):
 		result = None
 		try:
-			if self.token == '':
-				return None
+			if self.token == '': return None
 			url = base_url + url + '?agent=%s&apikey=%s' % (user_agent, self.token) + url_append
 			result = requests.get(url, timeout=self.timeout).json()
 			if result.get('status') == 'success':
@@ -35,7 +33,6 @@ class AllDebrid:
 			control.notification(title='default', message=40073, icon=ad_icon)
 		except BaseException:
 			log_utils.error()
-			pass
 		return result
 
 	def auth_loop(self):
@@ -61,9 +58,7 @@ class AllDebrid:
 		response = requests.get(url, timeout=self.timeout).json()
 		response = response['data']
 		control.progressDialog.create(control.lang(40056))
-		control.progressDialog.update(-1,
-				control.lang(32513) % 'https://alldebrid.com/pin/',
-				control.lang(32514) % response['pin'])
+		control.progressDialog.update(-1, control.progress_line % (control.lang(32513) % 'https://alldebrid.com/pin/', control.lang(32514) % response['pin'], ''))
 		self.check_url = response.get('check_url')
 		control.sleep(2000)
 		while not self.token:
@@ -85,7 +80,6 @@ class AllDebrid:
 			control.dialog.ok(control.lang(40059), control.lang(32314))
 		except:
 			log_utils.error()
-			pass
 
 	def account_info(self):
 		response = self._get('user')
@@ -110,5 +104,4 @@ class AllDebrid:
 			return control.selectDialog(items, 'All Debrid')
 		except:
 			log_utils.error()
-			pass
 		return

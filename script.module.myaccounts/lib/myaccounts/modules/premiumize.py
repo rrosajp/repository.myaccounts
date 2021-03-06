@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import requests
 
@@ -32,7 +31,6 @@ class Premiumize:
 					control.notification(title='default', message=response.get('message'), icon='default')
 		except:
 			log_utils.error()
-			pass
 		return response
 
 	def _post(self, url, data={}):
@@ -45,7 +43,6 @@ class Premiumize:
 					control.notification(title='default', message=response.get('message'), icon='default')
 		except:
 			log_utils.error()
-			pass
 		return response
 
 	def auth(self):
@@ -56,9 +53,7 @@ class Premiumize:
 		poll_again = True
 		success = False
 		progressDialog = control.progressDialog
-		progressDialog.create(control.lang(40054),
-								line1=control.lang(32513) % token['verification_uri'],
-								line2=control.lang(32514) % token['user_code'])
+		progressDialog.create(control.lang(40054), control.progress_line % (control.lang(32513) % token['verification_uri'], control.lang(32514) % token['user_code'], ''))
 		progressDialog.update(0)
 		while poll_again and not token_ttl <= 0 and not progressDialog.iscanceled():
 			poll_again, success = self.poll_token(token['device_code'])
@@ -93,7 +88,7 @@ class Premiumize:
 			control.dialog.ok(control.lang(40057), control.lang(32314))
 		except:
 			log_utils.error()
-			pass
+
 
 	def account_info(self):
 		try:
@@ -101,7 +96,6 @@ class Premiumize:
 			return accountInfo
 		except:
 			log_utils.error()
-			pass
 		return None
 
 	def account_info_to_dialog(self):
@@ -125,5 +119,4 @@ class Premiumize:
 			return control.selectDialog(items, 'Premiumize')
 		except:
 			log_utils.error()
-			pass
 		return

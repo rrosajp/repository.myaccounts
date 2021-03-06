@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import os.path
 import xbmc

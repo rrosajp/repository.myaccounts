@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 '''
 	My Accounts
 '''
@@ -8,24 +7,25 @@ from myaccounts.modules import control
 from myaccounts.modules import log_utils
 import _strptime
 import xbmc
+LOGNOTICE = xbmc.LOGNOTICE if control.getKodiVersion() < 19 else xbmc.LOGINFO # (2 in 18, deprecated in 19 use LOGINFO(1))
 
 
 class AddonCheckUpdate:
 	def run(self):
-		xbmc.log('[ script.module.myaccounts ]  Addon checking available updates', xbmc.LOGNOTICE)
+		xbmc.log('[ script.module.myaccounts ]  Addon checking available updates', LOGNOTICE)
 		try:
 			import re
 			import requests
 			repo_xml = requests.get('https://raw.githubusercontent.com/a4k-openproject/repository.myaccounts/master/zips/addons.xml')
 			if repo_xml.status_code != 200:
-				xbmc.log('[ script.module.myaccounts ]  Could not connect to remote repo XML: status code = %s' % repo_xml.status_code, xbmc.LOGNOTICE)
+				xbmc.log('[ script.module.myaccounts ]  Could not connect to remote repo XML: status code = %s' % repo_xml.status_code, LOGNOTICE)
 				return
 			repo_version = re.findall(r'<addon id=\"script.module.myaccounts\".*version=\"(\d*.\d*.\d*.\d*)\"', repo_xml.text)[0]
 			local_version = control.addonVersion()
 			if control.check_version_numbers(local_version, repo_version):
 				while control.condVisibility('Library.IsScanningVideo'):
 					control.sleep(10000)
-				xbmc.log('[ script.module.myaccounts ]  A newer version is available. Installed Version: v%s, Repo Version: v%s' % (local_version, repo_version), xbmc.LOGNOTICE)
+				xbmc.log('[ script.module.myaccounts ]  A newer version is available. Installed Version: v%s, Repo Version: v%s' % (local_version, repo_version), LOGNOTICE)
 				control.notification(title = 'default', message = 'A new verison of My Accounts is available from the repository. Please consider updating to v%s' % repo_version, icon='default', time=5000, sound=False)
 		except:
 			import traceback
@@ -39,7 +39,7 @@ class PremAccntNotification:
 		from myaccounts.modules import alldebrid
 		from myaccounts.modules import premiumize
 		from myaccounts.modules import realdebrid
-		xbmc.log('[ script.module.myaccounts ]  Debrid Account Expiry Notification Service Starting...', 2)
+		xbmc.log('[ script.module.myaccounts ]  Debrid Account Expiry Notification Service Starting...', LOGNOTICE)
 		self.duration = [(15, 10), (11, 7), (8, 4), (5, 2), (3, 0)]
 		if control.setting('alldebrid.username') != '' and control.setting('alldebrid.expiry.notice') == 'true':
 			account_info = alldebrid.AllDebrid().account_info()['user']
@@ -88,8 +88,8 @@ class PremAccntNotification:
 
 if control.setting('checkAddonUpdates') == 'true':
 	AddonCheckUpdate().run()
-	xbmc.log('[ script.module.myaccounts ]  Addon update check complete', xbmc.LOGNOTICE)
+	xbmc.log('[ script.module.myaccounts ]  Addon update check complete', LOGNOTICE)
 
 PremAccntNotification().run()
 
-xbmc.log('[ script.module.myaccounts ]  service stopped', xbmc.LOGNOTICE)
+xbmc.log('[ script.module.myaccounts ]  service stopped', LOGNOTICE)

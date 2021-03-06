@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import requests
 
@@ -26,7 +25,8 @@ class Auth:
 				return
 			url = self.auth_base_link + '/token/new?api_key=%s' % API_key
 			result = requests.get(url).json()
-			token = result.get('request_token').encode('utf-8')
+			# token = result.get('request_token').encode('utf-8')
+			token = result.get('request_token')
 			url2 = self.auth_base_link + '/token/validate_with_login?api_key=%s' % API_key
 
 			username = control.setting('tmdb.username')
@@ -43,14 +43,13 @@ class Auth:
 			if result3.get('success') is True:
 				session_id = result3.get('session_id')
 				msg = '%s' % ('username =' + username + '[CR]password =' + password + '[CR]token = ' + token + '[CR]confirm?')
-				if control.yesnoDialog(msg, '', ''):
+				if control.yesnoDialog(msg):
 					control.setSetting('tmdb.session_id', session_id)
 					control.notification(title='default', message=32679, icon='default')
 				else:
 					control.notification(title='default', message=32680, icon='ERROR')
 		except:
 			log_utils.error()
-			pass
 
 
 	def revoke_session_id(self):
@@ -67,4 +66,3 @@ class Auth:
 				control.notification(title='default', message=32682, icon='ERROR')
 		except:
 			log_utils.error()
-			pass

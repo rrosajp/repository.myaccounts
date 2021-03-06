@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 
 import json
@@ -54,7 +53,6 @@ class RealDebrid:
 			return response
 		except:
 			log_utils.error()
-			pass
 		return None
 
 
@@ -107,9 +105,7 @@ class RealDebrid:
 		url = oauth_base_url + device_code_url % url
 		response = json.loads(requests.get(url).text)
 		control.progressDialog.create(control.lang(40055))
-		control.progressDialog.update(-1,
-				control.lang(32513) % 'https://real-debrid.com/device',
-				control.lang(32514) % response['user_code'])
+		control.progressDialog.update(-1, control.progress_line % (control.lang(32513) % 'https://real-debrid.com/device', control.lang(32514) % response['user_code'], ''))
 
 		self.auth_timeout = int(response['expires_in'])
 		self.auth_step = int(response['interval'])
@@ -152,7 +148,6 @@ class RealDebrid:
 			return control.selectDialog(items, 'Real-Debrid')
 		except:
 			log_utils.error()
-			pass
 		return
 
 
@@ -203,4 +198,3 @@ class RealDebrid:
 			control.dialog.ok(control.lang(40058), control.lang(32314))
 		except:
 			log_utils.error()
-			pass

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="script.module.myaccounts" version="1.0.7" name="My Accounts" provider-name="Venom, Fen">
+<addon id="script.module.myaccounts" version="1.0.8" name="My Accounts" provider-name="Venom, Fen">
 	<requires>
-		<import addon="xbmc.python" version="2.14.0" />
 		<import addon="script.module.requests" version="2.19.1" />
 	</requires>
 	<extension point="xbmc.python.script" library="lib/default.py">
@@ -26,9 +25,8 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.0.7 - Dec. 30, 2020[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Added Debrid expiry notifications fallback for server
-    errors. This avoids bogus 500 log errors etc.[/I]
+[B][COLOR red]Update - v1.0.8 - March 06, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Matrix(py3) compatibility update.[/I]
 		</news>
 	</extension>
 </addon>

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import os.path
 import xbmc
@@ -24,12 +23,13 @@ getLangString = xbmcaddon.Addon().getLocalizedString
 
 condVisibility = xbmc.getCondVisibility
 execute = xbmc.executebuiltin
-jsonrpc = xbmc.executeJSONRPC
+# jsonrpc = xbmc.executeJSONRPC
 window = xbmcgui.Window(10000)
 monitor = xbmc.Monitor()
 
 dialog = xbmcgui.Dialog()
 progressDialog = xbmcgui.DialogProgress()
+progress_line = '%s[CR]%s[CR]%s'
 
 joinPath = os.path.join
 
@@ -117,11 +117,11 @@ def idle():
 def notification(title=None, message=None, icon=None, time=3000, sound=False):
 	if title == 'default' or title is None:
 		title = addonName()
-	if isinstance(title, (int, long)):
+	if isinstance(title, int):
 		heading = lang(title)
 	else:
 		heading = str(title)
-	if isinstance(message, (int, long)):
+	if isinstance(message, int):
 		body = lang(message)
 	else:
 		body = str(message)
@@ -136,8 +136,8 @@ def notification(title=None, message=None, icon=None, time=3000, sound=False):
 	dialog.notification(heading, body, icon, time, sound=sound)
 
 
-def yesnoDialog(line1, line2, line3, heading=addonInfo('name'), nolabel='', yeslabel=''):
-	return dialog.yesno(heading, line1, line2, line3, nolabel, yeslabel)
+def yesnoDialog(line, heading=addonInfo('name'), nolabel='', yeslabel=''):
+	return dialog.yesno(heading, line, nolabel, yeslabel)
 
 
 def selectDialog(list, heading=addonInfo('name')):
@@ -147,11 +147,11 @@ def selectDialog(list, heading=addonInfo('name')):
 def okDialog(title=None, message=None):
 	if title == 'default' or title is None:
 		title = addonName()
-	if isinstance(title, (int, long)):
+	if isinstance(title, int):
 		heading = lang(title)
 	else:
 		heading = str(title)
-	if isinstance(message, (int, long)):
+	if isinstance(message, int):
 		body = lang(message)
 	else:
 		body = str(message)

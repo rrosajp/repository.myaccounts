@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
-'''
+"""
 	My Accounts
-'''
+"""
 
 import requests
 import time
@@ -70,7 +69,7 @@ class Trakt():
 			expires_in = device_codes['expires_in']
 			verification_url = control.lang(32513) % str(device_codes['verification_url'])
 			user_code = control.lang(32514) % str(device_codes['user_code'])
-			control.progressDialog.create(control.lang(32073), verification_url, user_code)
+			control.progressDialog.create(control.lang(32073), control.progress_line % (verification_url, user_code, ''))
 			try:
 				time_passed = 0
 				while not control.progressDialog.iscanceled() and time_passed < expires_in:
@@ -196,4 +195,3 @@ class Trakt():
 		except:
 			log_utils.error()
 			return
-
