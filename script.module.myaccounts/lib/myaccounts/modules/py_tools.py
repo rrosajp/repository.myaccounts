@@ -48,8 +48,6 @@ def ensure_str(s, encoding='utf-8', errors='strict'):
 	try:
 		if not isinstance(s, (text_type, binary_type)):
 			return log_utils.log("not expecting type '%s'" % type(s), __name__, log_utils.LOGDEBUG)
-		try: s = s.encode('ascii', errors='ignore').decode('ascii', errors='ignore') # added for ascii characters, check if this is correct for both 18 and 19
-		except: pass
 		if isPY2 and isinstance(s, text_type):
 			s = s.encode(encoding, errors)
 		elif isPY3 and isinstance(s, binary_type):

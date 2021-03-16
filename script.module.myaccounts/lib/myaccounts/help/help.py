@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
-
 """
 	My Accounts
 """
 
-import os.path
-import xbmc
-import xbmcaddon
-import xbmcgui
+from myaccounts.modules import control
+
+myaccounts_path = control.addonPath()
+myaccounts_version = control.addonVersion()
 
 
 def get(file):
-	addonInfo = xbmcaddon.Addon().getAddonInfo
-	addonPath = xbmc.translatePath(addonInfo('path'))
-	helpFile = os.path.join(addonPath, 'lib', 'myaccounts', 'help', file + '.txt')
+	helpFile = control.joinPath(myaccounts_path, 'lib', 'myaccounts', 'help', file + '.txt')
 	r = open(helpFile)
 	text = r.read()
 	r.close()
-	xbmcgui.Dialog().textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - %s' % (xbmcaddon.Addon().getAddonInfo('version'), file), text)
+	control.dialog.textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - %s' % (myaccounts_version, file), text)

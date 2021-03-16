@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="script.module.myaccounts" version="1.0.8" name="My Accounts" provider-name="Venom, Fen">
+<addon id="script.module.myaccounts" version="1.0.9" name="My Accounts" provider-name="Venom, Fen">
 	<requires>
 		<import addon="script.module.requests" version="2.19.1" />
 	</requires>
@@ -25,8 +25,8 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.0.8 - March 06, 2021[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Matrix(py3) compatibility update.[/I]
+[B][COLOR red]Update - v1.0.9 - March 16, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Matrix fix for xbmc.translatePath.[/I]
 		</news>
 	</extension>
 </addon>

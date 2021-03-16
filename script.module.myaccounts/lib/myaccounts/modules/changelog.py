@@ -3,17 +3,15 @@
 	My Accounts
 """
 
-import os.path
-import xbmc
-import xbmcaddon
-import xbmcgui
+from myaccounts.modules import control
+
+myaccounts_path = control.addonPath()
+myaccounts_version = control.addonVersion()
+changelogfile = control.joinPath(myaccounts_path, 'changelog.txt')
 
 
 def get():
-	addonInfo = xbmcaddon.Addon().getAddonInfo
-	addonPath = xbmc.translatePath(addonInfo('path'))
-	helpFile = os.path.join(addonPath, 'changelog.txt')
-	r = open(helpFile)
+	r = open(changelogfile)
 	text = r.read()
 	r.close()
-	xbmcgui.Dialog().textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - ChangeLog' % (xbmcaddon.Addon().getAddonInfo('version')), text)
+	control.dialog.textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - ChangeLog' % myaccounts_version, text)

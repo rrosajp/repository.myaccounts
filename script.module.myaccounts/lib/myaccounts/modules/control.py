@@ -9,34 +9,37 @@ import xbmcaddon
 import xbmcgui
 import xbmcvfs
 
+def getKodiVersion():
+	return int(xbmc.getInfoLabel("System.BuildVersion")[:2])
+
 addon = xbmcaddon.Addon
 addonObject = addon('script.module.myaccounts')
 addonInfo = addonObject.getAddonInfo
+getLangString = xbmcaddon.Addon().getLocalizedString
+condVisibility = xbmc.getCondVisibility
+execute = xbmc.executebuiltin
+# jsonrpc = xbmc.executeJSONRPC
+monitor = xbmc.Monitor()
+transPath = xbmc.translatePath if getKodiVersion() < 19 else xbmcvfs.translatePath
+joinPath = os.path.join
+
+dialog = xbmcgui.Dialog()
+window = xbmcgui.Window(10000)
+progressDialog = xbmcgui.DialogProgress()
+
+existsPath = xbmcvfs.exists
+openFile = xbmcvfs.File
+makeFile = xbmcvfs.mkdir
+
+progress_line = '%s[CR]%s[CR]%s'
+
 
 def setting(id):
 	return xbmcaddon.Addon('script.module.myaccounts').getSetting(id)
 
+
 def setSetting(id, value):
 	return xbmcaddon.Addon('script.module.myaccounts').setSetting(id, value)
-
-getLangString = xbmcaddon.Addon().getLocalizedString
-
-condVisibility = xbmc.getCondVisibility
-execute = xbmc.executebuiltin
-# jsonrpc = xbmc.executeJSONRPC
-window = xbmcgui.Window(10000)
-monitor = xbmc.Monitor()
-
-dialog = xbmcgui.Dialog()
-progressDialog = xbmcgui.DialogProgress()
-progress_line = '%s[CR]%s[CR]%s'
-
-joinPath = os.path.join
-
-existsPath = xbmcvfs.exists
-makeFile = xbmcvfs.mkdir
-openFile = xbmcvfs.File
-
 
 
 def lang(language_id):
@@ -50,10 +53,6 @@ def sleep(time):  # Modified `sleep` command that honors a user exit request
 	while time > 0 and not monitor.abortRequested():
 		xbmc.sleep(min(100, time))
 		time = time - 100
-
-
-def getKodiVersion():
-	return int(xbmc.getInfoLabel("System.BuildVersion")[:2])
 
 
 def check_version_numbers(current, new):
@@ -86,6 +85,11 @@ def addonIcon():
 	return addonInfo('icon')
 
 
+def addonPath():
+	try: return transPath(addonInfo('path').decode('utf-8'))
+	except: return transPath(addonInfo('path'))
+
+
 def artPath():
 	return os.path.join(xbmcaddon.Addon('script.module.myaccounts').getAddonInfo('path'), 'resources', 'icons')
 
@@ -94,8 +98,7 @@ def openSettings(query=None, id=addonInfo('id')):
 	try:
 		idle()
 		execute('Addon.OpenSettings(%s)' % id)
-		if query is None:
-			raise Exception()
+		if query is None: return
 		c, f = query.split('.')
 		if getKodiVersion() >= 18:
 			execute('SetFocus(%i)' % (int(c) - 100))
@@ -115,24 +118,15 @@ def idle():
 
 
 def notification(title=None, message=None, icon=None, time=3000, sound=False):
-	if title == 'default' or title is None:
-		title = addonName()
-	if isinstance(title, int):
-		heading = lang(title)
-	else:
-		heading = str(title)
-	if isinstance(message, int):
-		body = lang(message)
-	else:
-		body = str(message)
-	if icon is None or icon == '' or icon == 'default':
-		icon = addonIcon()
-	elif icon == 'INFO':
-		icon = xbmcgui.NOTIFICATION_INFO
-	elif icon == 'WARNING':
-		icon = xbmcgui.NOTIFICATION_WARNING
-	elif icon == 'ERROR':
-		icon = xbmcgui.NOTIFICATION_ERROR
+	if title == 'default' or title is None: title = addonName()
+	if isinstance(title, int): heading = lang(title)
+	else: heading = str(title)
+	if isinstance(message, int): body = lang(message)
+	else: body = str(message)
+	if icon is None or icon == '' or icon == 'default': icon = addonIcon()
+	elif icon == 'INFO': icon = xbmcgui.NOTIFICATION_INFO
+	elif icon == 'WARNING': icon = xbmcgui.NOTIFICATION_WARNING
+	elif icon == 'ERROR': icon = xbmcgui.NOTIFICATION_ERROR
 	dialog.notification(heading, body, icon, time, sound=sound)
 
 
@@ -145,16 +139,11 @@ def selectDialog(list, heading=addonInfo('name')):
 
 
 def okDialog(title=None, message=None):
-	if title == 'default' or title is None:
-		title = addonName()
-	if isinstance(title, int):
-		heading = lang(title)
-	else:
-		heading = str(title)
-	if isinstance(message, int):
-		body = lang(message)
-	else:
-		body = str(message)
+	if title == 'default' or title is None: title = addonName()
+	if isinstance(title, int): heading = lang(title)
+	else: heading = str(title)
+	if isinstance(message, int): body = lang(message)
+	else: body = str(message)
 	return dialog.ok(heading, body)
 
 

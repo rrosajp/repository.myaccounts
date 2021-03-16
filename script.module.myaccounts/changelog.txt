@@ -1,3 +1,6 @@
+[B][COLOR red]Update - v1.0.9 - March 16, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Matrix fix for xbmc.translatePath.[/I]
+
 [B][COLOR red]Update - v1.0.8 - March 06, 2021[/COLOR][/B]
 [COLOR yellow]--[/COLOR][I] Matrix(py3) compatibility update.[/I]
 

@@ -43,7 +43,7 @@ class Generator:
             print "NEW ADD-ON - Creating zip for: %s v.%s" % (addon_id,version)
             zip = zipfile.ZipFile(final_zip, 'w', compression=zipfile.ZIP_DEFLATED )
             root_len = len(os.path.dirname(os.path.abspath(addon_id)))
-            
+
             for root, dirs, files in os.walk(addon_id):
                 # remove any unneeded git artifacts
                 for i in ['.git', '.github']:
@@ -52,7 +52,7 @@ class Generator:
                             dirs.remove(i)
                         except:
                             pass
-                
+
                 archive_root = os.path.abspath(root)[root_len:]
 
                 for f in files:
@@ -62,7 +62,7 @@ class Generator:
                         archive_name = os.path.join( archive_root, f )
                         zip.write( fullpath, archive_name, zipfile.ZIP_DEFLATED )
             zip.close()
-            
+
 # Copy over the icon, fanart and addon.xml to the zip directory
             copyfiles = ['icon.png','fanart.jpg','addon.xml']
             files = os.listdir(addon_id)
@@ -70,27 +70,34 @@ class Generator:
                 if file in copyfiles:
                     shutil.copy(os.path.join(addon_id,file),addon_folder)
 
-# Remove any instances of pyc or pyo files
+# Remove All instances of .pyc or .pyo files and __pycache__ folders
     def _remove_binaries(self):
         for parent, dirnames, filenames in os.walk('.'):
             for fn in filenames:
                 if fn.lower().endswith('pyo') or fn.lower().endswith('pyc'):
                     compiled = os.path.join(parent, fn)
-                    py_file  = compiled.replace('.pyo','.py').replace('.pyc','.py')
-                    if os.path.exists(py_file):
-                        try:
-                            os.remove(compiled)
-                            print"Removed compiled python file:"
-                            print compiled
-                            print'-----------------------------'
-                        except:
-                            print"Failed to remove compiled python file:"
-                            print compiled
-                            print'-----------------------------'
-                    else:
-                        print"Compiled python file found but no matching .py file exists:"
+                    try:
+                        os.remove(compiled)
+                        print "Removed compiled python file:"
                         print compiled
-                        print'-----------------------------'
+                        print '-----------------------------'
+                    except:
+                        print "Failed to remove compiled python file:"
+                        print compiled
+                        print '-----------------------------'
+            for dir in dirnames:
+                if "pycache" in dir.lower():
+                    compiled = os.path.join(parent, dir)
+                    try:
+                        # os.rmdir(compiled) # only removes empty dir's. play it safe with shutil.rmtree()
+                        shutil.rmtree(compiled)
+                        print "Removed __pycache__ cache folder:"
+                        print compiled
+                        print '-----------------------------'
+                    except:
+                        print "Failed to remove __pycache__ cache folder:"
+                        print compiled
+                        print '-----------------------------'
 
     def _generate_addons_file(self):
 # addon list
@@ -117,7 +124,7 @@ class Generator:
                     addon_xml += unicode( line.rstrip() + "\n", "utf-8")
                 addons_xml += addon_xml.rstrip() + "\n\n"
 
-# Create the zip files                
+# Create the zip files
                 self.Create_Zips(addon,version)
 
             except Exception, e:
@@ -139,7 +146,6 @@ class Generator:
             open(file, 'w').write(data)
         except Exception, e:
             print "An error occurred saving %s file!\n%s" % (file,e)
-
 
 if ( __name__ == "__main__" ):
     Generator()

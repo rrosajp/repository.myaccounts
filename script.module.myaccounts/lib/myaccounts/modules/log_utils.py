@@ -22,29 +22,32 @@ if py_tools.isPY2:
 else:
 	debug_list = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'FATAL']
 DEBUGPREFIX = '[COLOR red][ My Accounts %s ][/COLOR]'
-LOGPATH = xbmc.translatePath('special://logpath/')
+LOGPATH = control.transPath('special://logpath/')
 
 
 def log(msg, caller=None, level=LOGNOTICE):
 	debug_enabled = control.setting('debug.enabled') == 'true'
 	if not debug_enabled: return
-	debug_log = control.setting('debug.location')
+	debug_location = control.setting('debug.location')
+
 	try:
 		if caller is not None and level != LOGERROR:
 			func = inspect.currentframe().f_back.f_code
 			line_number = inspect.currentframe().f_back.f_lineno
 			caller = "%s.%s()" % (caller, func.co_name)
 			msg = 'From func name: %s Line # :%s\n                       msg : %s' % (caller, line_number, msg)
-
 		if caller is not None and level == LOGERROR:
 			msg = 'From func name: %s.%s() Line # :%s\n                       msg : %s' % (caller[0], caller[1], caller[2], msg)
+
+		try: msg = msg.encode('ascii', errors='ignore').decode('ascii', errors='ignore')
+		except: pass
+
 		try:
 			if isinstance(msg, py_tools.text_type):
-				# msg = msg.encode('ascii', errors='ignore').decode('ascii', errors='ignore') moved this to `ensure_str(), check if it's correct.
 				msg = '%s (ENCODED)' % (py_tools.ensure_str(msg, errors='replace'))
 		except: pass
 
-		if debug_log == '1':
+		if debug_location == '1':
 			log_file = control.joinPath(LOGPATH, 'myaccounts.log')
 			if not control.existsPath(log_file):
 				f = open(log_file, 'w')
