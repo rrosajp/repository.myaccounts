@@ -4,7 +4,6 @@
 """
 
 import requests
-
 from myaccounts.modules import control
 from myaccounts.modules import log_utils
 
@@ -88,7 +87,6 @@ class Premiumize:
 			control.dialog.ok(control.lang(40057), control.lang(32314))
 		except:
 			log_utils.error()
-
 
 	def account_info(self):
 		try:

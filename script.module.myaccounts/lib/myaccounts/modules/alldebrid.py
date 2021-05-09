@@ -3,9 +3,7 @@
 	My Accounts
 """
 
-
 import requests
-
 from myaccounts.modules import control
 from myaccounts.modules import log_utils
 
@@ -27,8 +25,7 @@ class AllDebrid:
 			url = base_url + url + '?agent=%s&apikey=%s' % (user_agent, self.token) + url_append
 			result = requests.get(url, timeout=self.timeout).json()
 			if result.get('status') == 'success':
-				if 'data' in result:
-					result = result['data']
+				if 'data' in result: result = result['data']
 		except requests.exceptions.ConnectionError:
 			control.notification(title='default', message=40073, icon=ad_icon)
 		except BaseException:
@@ -66,8 +63,7 @@ class AllDebrid:
 				control.progressDialog.close()
 				break
 			self.auth_loop()
-		if self.token in (None, '', 'failed'):
-			return
+		if self.token in (None, '', 'failed'): return
 		control.sleep(2000)
 		account_info = self.account_info()
 		control.setSetting('alldebrid.username', str(account_info['user']['username']))

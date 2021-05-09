@@ -5,7 +5,6 @@
 
 import requests
 import time
-
 from myaccounts.modules import control
 from myaccounts.modules import log_utils
 
@@ -19,7 +18,6 @@ class Trakt():
 		self.expires_at = control.setting('trakt.expires')
 		self.token = control.setting('trakt.token')
 
-
 	def call(self, path, data=None, with_auth=True, method=None, suppress_error_notification=False):
 		try:
 			def error_notification(line1, error):
@@ -29,16 +27,12 @@ class Trakt():
 				resp = None
 				if with_auth:
 					try:
-						if time.time() > self.expires_at:
-							self.refresh_token()
-					except:
-						pass
+						if time.time() > self.expires_at: self.refresh_token()
+					except: pass
 					headers['Authorization'] = 'Bearer ' + self.token
 				try:
-					if data is not None:
-						resp = requests.post(self.api_endpoint % path, json=data, headers=headers, timeout=timeout)
-					else:
-						resp = requests.get(self.api_endpoint % path, headers=headers, timeout=timeout)
+					if data is not None: resp = requests.post(self.api_endpoint % path, json=data, headers=headers, timeout=timeout)
+					else: resp = requests.get(self.api_endpoint % path, headers=headers, timeout=timeout)
 				except requests.exceptions.RequestException as e:
 					error_notification('Trakt Error', str(e))
 				except Exception as e:
@@ -54,11 +48,9 @@ class Trakt():
 		except:
 			log_utils.error()
 
-
 	def get_device_code(self):
 		data = {'client_id': self.client_id}
 		return self.call("oauth/device/code", data=data, with_auth=False)
-
 
 	def get_device_token(self, device_codes):
 		try:
@@ -77,23 +69,19 @@ class Trakt():
 						response = self.call("oauth/device/token", data=data, with_auth=False, suppress_error_notification=True)
 					except requests.HTTPError as e:
 						log_utils.log('Request Error: %s' % str(e), __name__, log_utils.LOGDEBUG)
-						if e.response.status_code != 400:
-							raise e
+						if e.response.status_code != 400: raise e
 						progress = int(100 * time_passed / expires_in)
 						control.progressDialog.update(progress)
 						control.sleep(max(device_codes['interval'], 1)*1000)
 					else:
-						if not response:
-							continue
-						else:
-							return response
+						if not response: continue
+						else: return response
 					time_passed = time.time() - start
 			finally:
 				control.progressDialog.close()
 			return None
 		except:
 			log_utils.error()
-
 
 	def refresh_token(self):
 		traktToken = None
@@ -112,7 +100,6 @@ class Trakt():
 			control.setSetting('trakt.token', traktToken)
 			control.setSetting('trakt.refresh', traktRefresh)
 		self.token = traktToken
-
 
 	def auth(self):
 		try:
@@ -137,7 +124,6 @@ class Trakt():
 		except:
 			log_utils.error()
 
-
 	def revoke(self):
 		data = {"token": control.setting('trakt.token')}
 		try: self.call("oauth/revoke", data=data, with_auth=False)
@@ -148,17 +134,14 @@ class Trakt():
 		control.setSetting('trakt.refresh', '')
 		control.dialog.ok(control.lang(32315), control.lang(32314))
 
-	
 	def account_info(self):
 		response = self.call("users/me", with_auth=True)
 		return response
-
 
 	def extended_account_info(self):
 		account_info = self.call("users/settings", with_auth=True)
 		stats = self.call("users/%s/stats" % account_info['user']['ids']['slug'], with_auth=True)
 		return account_info, stats
-
 
 	def account_info_to_dialog(self):
 		from datetime import datetime, timedelta

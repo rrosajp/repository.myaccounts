@@ -32,7 +32,6 @@ class AddonCheckUpdate:
 			traceback.print_exc()
 			pass
 
-
 class PremAccntNotification:
 	def run(self):
 		from datetime import datetime

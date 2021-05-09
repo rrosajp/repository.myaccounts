@@ -7,20 +7,17 @@
 import sys
 try:
 	from urlparse import parse_qsl
-except:
+except ImportError: #Py3
 	from urllib.parse import parse_qsl
 from myaccounts.modules import control
 
-
 control.set_active_monitor()
-
 
 params = {}
 for param in sys.argv[1:]:
 	param = param.split('=')
 	param_dict = dict([param])
 	params = dict(params, **param_dict)
-
 
 action = params.get('action')
 query = params.get('query')

@@ -36,7 +36,7 @@ def log(msg, caller=None, level=LOGNOTICE):
 			line_number = inspect.currentframe().f_back.f_lineno
 			caller = "%s.%s()" % (caller, func.co_name)
 			msg = 'From func name: %s Line # :%s\n                       msg : %s' % (caller, line_number, msg)
-		if caller is not None and level == LOGERROR:
+		elif caller is not None and level == LOGERROR:
 			msg = 'From func name: %s.%s() Line # :%s\n                       msg : %s' % (caller[0], caller[1], caller[2], msg)
 
 		try: msg = msg.encode('ascii', errors='ignore').decode('ascii', errors='ignore')
