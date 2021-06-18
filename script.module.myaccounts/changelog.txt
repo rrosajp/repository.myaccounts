@@ -1,3 +1,10 @@
+
+[B][COLOR red]Update - v1.1.1 - June 18, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Trakt improvements to account auth for better server error capturing.[/I]
+[COLOR yellow]--[/COLOR][I] Trakt expire duration was not properly saved to user settings.
+    This is now fixed.[/I]
+[COLOR yellow]--[/COLOR][I] Fixed entry point import issue.[/I]
+
 [B][COLOR red]Update - v1.1.0 - May 08, 2021[/COLOR][/B]
 [COLOR yellow]--[/COLOR][I] Change RD to only revoke auth under invalid account response
     only!  Previousely a "Temporarily Down For Maintenance"

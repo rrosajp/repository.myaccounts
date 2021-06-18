@@ -134,12 +134,12 @@ def getOrro():
 
 
 def traktRefreshToken():
-	from modules.trakt import Trakt
+	from myaccounts.modules.trakt import Trakt
 	Trakt().refresh_token()
 
 
 def realdebridRefreshToken():
-	from modules.realdebrid import RealDebrid
+	from myaccounts.modules.realdebrid import RealDebrid
 	RealDebrid().refresh_token()
 
 

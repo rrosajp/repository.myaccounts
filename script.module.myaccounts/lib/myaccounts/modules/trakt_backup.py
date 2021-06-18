@@ -6,7 +6,6 @@
 import requests
 import time
 from myaccounts.modules import control
-from myaccounts.modules import py_tools
 from myaccounts.modules import log_utils
 
 trakt_icon = control.joinPath(control.artPath(), 'trakt.png')
@@ -19,7 +18,7 @@ class Trakt():
 		self.expires_at = control.setting('trakt.expires')
 		self.token = control.setting('trakt.token')
 
-	def call(self, path, data=None, with_auth=True, method=None, return_str=False, suppress_error_notification=False):
+	def call(self, path, data=None, with_auth=True, method=None, suppress_error_notification=False):
 		try:
 			def error_notification(line1, error):
 				if suppress_error_notification: return
@@ -43,7 +42,6 @@ class Trakt():
 			headers = {'Content-Type': 'application/json', 'trakt-api-version': '2', 'trakt-api-key': self.client_id}
 			response = send_query()
 			response.encoding = 'utf-8'
-			if return_str: return response
 			try: result = response.json()
 			except: result = None
 			return result
@@ -96,37 +94,14 @@ class Trakt():
 			"grant_type": "refresh_token",
 			"refresh_token": control.setting('trakt.refresh')
 		}
-
-		response = self.call("oauth/token", data=data, with_auth=False, return_str=True)
-		try: code = str(response[1])
-		except: code = ''
-
-		if code.startswith('5') or (response and isinstance(response, py_tools.string_types) and '<html' in response) or not response: # covers Maintenance html responses ["Bad Gateway", "We're sorry, but something went wrong (500)"])
-			log_utils.log('Temporary Trakt Server Problems', level=log_utils.LOGNOTICE)
-			control.notification(title=32315, message=33676)
-			return False
-		elif response and code in ['423']:
-			log_utils.log('Locked User Account - Contact Trakt Support: %s' % str(response[0]), level=log_utils.LOGWARNING)
-			control.notification(title=32315, message=33675)
-			return False
-
-		if response and code not in ['401', '405']:
-			try:
-				response = response.json()
-			except:
-				log_utils.error()
-				return False
-			if 'error' in response and response['error'] == 'invalid_grant':
-				log_utils.log('Please Re-Authorize your Trakt Account: %s' % response['error'], __name__, level=log_utils.LOGWARNING)
-				control.notification(title=32315, message=33677)
-				return False
-
+		response = self.call("oauth/token", data=data, with_auth=False)
+		if response:
 			traktToken = response["access_token"]
 			traktRefresh = response["refresh_token"]
 			traktExpires = time.time() + 7776000
 			control.setSetting('trakt.token', traktToken)
 			control.setSetting('trakt.refresh', traktRefresh)
-			control.setSetting('trakt.expires', str(traktExpires))
+			control.setSetting('trakt.expires', traktExpires)
 		self.token = traktToken
 
 	def auth(self):
