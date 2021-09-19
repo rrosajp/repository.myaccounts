@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="script.module.myaccounts" version="1.1.2" name="My Accounts" provider-name="Venom, Fen">
+<addon id="script.module.myaccounts" version="1.1.3" name="My Accounts" provider-name="Venom, Fen">
 	<requires>
 		<import addon="script.module.requests" version="2.19.1" />
 	</requires>
@@ -25,9 +25,8 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.1.2 - Sept 19, 2021[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] You can now view, clear, and upload to pastebin the My Accounts log file.  See new settings under [B]"Options"[/B] category.[/I]
-[COLOR yellow]--[/COLOR][I] Changelog and Help file viewers have be switched to window xml's for clarity of viewing.[/I]
+[B][COLOR red]Update - v1.1.3 - Sept 19, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Fixed encoding issue when opening changelog file.[/I]
 		</news>
 	</extension>
 </addon>
