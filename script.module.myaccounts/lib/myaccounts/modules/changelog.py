@@ -3,15 +3,18 @@
 	My Accounts
 """
 
-from myaccounts.modules import control
-
-myaccounts_path = control.addonPath()
-myaccounts_version = control.addonVersion()
-changelogfile = control.joinPath(myaccounts_path, 'changelog.txt')
+from myaccounts.modules.control import addonPath, addonVersion, joinPath
+from myaccounts.windows.textviewer import TextViewerXML
 
 
 def get():
+	myaccounts_path = addonPath()
+	myaccounts_version = addonVersion()
+	changelogfile = joinPath(myaccounts_path, 'changelog.txt')
 	r = open(changelogfile)
 	text = r.read()
 	r.close()
-	control.dialog.textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - ChangeLog' % myaccounts_version, text)
+	heading = '[B]My Accounts -  v%s - ChangeLog[/B]' % myaccounts_version
+	windows = TextViewerXML('textviewer.xml', myaccounts_path, heading=heading, text=text)
+	windows.run()
+	del windows

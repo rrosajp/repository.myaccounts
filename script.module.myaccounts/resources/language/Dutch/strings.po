@@ -25,6 +25,10 @@ msgctxt "#32073"
 msgid "[B]TRAKT[/B] : Authorize"
 msgstr "[B]TRAKT[/B]: Autoriseer"
 
+msgctxt "#32074"
+msgid "Are you sure?"
+msgstr "Weet u het zeker?"
+
 msgctxt "#32306"
 msgid "Authorization..."
 msgstr "Autoriseren..."
@@ -172,6 +176,26 @@ msgstr "Logboek Locatie"
 msgctxt "#32344"
 msgid "Password"
 msgstr "Wachtwoord"
+
+msgctxt "#32345"
+msgid "Write My Accounts log in reverse order"
+msgstr "Schrijf Mijn Accounts log in omgekeerde volgorde"
+
+msgctxt "#32346"
+msgid "Clear My Accounts log file"
+msgstr "Logbestand Mijn Accounts wissen"
+
+msgctxt "#32347"
+msgid "View My Accounts log file"
+msgstr "Logbestand Mijn Accounts bekijken"
+
+msgctxt "#32348"
+msgid "Upload My Accounts log file to pastebin"
+msgstr "Upload Mijn Accounts-logbestand naar pastebin"
+
+msgctxt "#32349"
+msgid "My Accounts log file uploaded to:"
+msgstr "Mijn Accounts-logbestand geüpload naar:"
 
 msgctxt "#32369"
 msgid "TVDB api key1"
@@ -400,4 +424,3 @@ msgstr "Configuratie"
 msgctxt "#40086"
 msgid "Account Expiry Notification"
 msgstr "Account Verlopen Notificatie"
-

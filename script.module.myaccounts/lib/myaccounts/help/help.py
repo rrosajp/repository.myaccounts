@@ -3,15 +3,18 @@
 	My Accounts
 """
 
-from myaccounts.modules import control
-
-myaccounts_path = control.addonPath()
-myaccounts_version = control.addonVersion()
+from myaccounts.modules.control import addonPath, addonVersion, joinPath
+from myaccounts.windows.textviewer import TextViewerXML
 
 
 def get(file):
-	helpFile = control.joinPath(myaccounts_path, 'lib', 'myaccounts', 'help', file + '.txt')
+	myaccounts_path = addonPath()
+	myaccounts_version = addonVersion()
+	helpFile = joinPath(myaccounts_path, 'lib', 'myaccounts', 'help', file + '.txt')
 	r = open(helpFile)
 	text = r.read()
 	r.close()
-	control.dialog.textviewer('[COLOR red]My Accounts[/COLOR] -  v%s - %s' % (myaccounts_version, file), text)
+	heading = '[B]My Accounts -  v%s - %s[/B]' % (myaccounts_version, file)
+	windows = TextViewerXML('textviewer.xml', myaccounts_path, heading=heading, text=text)
+	windows.run()
+	del windows

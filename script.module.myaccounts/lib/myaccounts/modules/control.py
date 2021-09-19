@@ -50,8 +50,7 @@ def sleep(time):  # Modified `sleep` command that honors a user exit request
 		xbmc.sleep(min(100, time))
 		time = time - 100
 
-def check_version_numbers(current, new):
-	# Compares version numbers and return True if new version is newer
+def check_version_numbers(current, new): # Compares version numbers and return True if new version is newer
 	current = current.split('.')
 	new = new.split('.')
 	step = 0
@@ -158,3 +157,8 @@ def function_monitor(func, query='0.0'):
 		sleep(250)
 	sleep(100)
 	release_active_monitor()
+
+def refresh_debugReversed(): # called from service "onSettingsChanged" to clear myaccounts.log if setting to reverse has been changed
+	if window.getProperty('myaccounts.debug.reversed') != setting('debug.reversed'):
+		window.setProperty('myaccounts.debug.reversed', setting('debug.reversed'))
+		execute('RunScript(script.module.myaccounts, action=tools_clearLogFile)')

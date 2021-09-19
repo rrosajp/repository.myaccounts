@@ -18,8 +18,7 @@ class AddonCheckUpdate:
 			import requests
 			repo_xml = requests.get('https://raw.githubusercontent.com/a4k-openproject/repository.myaccounts/master/zips/addons.xml')
 			if repo_xml.status_code != 200:
-				xbmc.log('[ script.module.myaccounts ]  Could not connect to remote repo XML: status code = %s' % repo_xml.status_code, LOGNOTICE)
-				return
+				return xbmc.log('[ script.module.myaccounts ]  Could not connect to remote repo XML: status code = %s' % repo_xml.status_code, LOGNOTICE)
 			repo_version = re.findall(r'<addon id=\"script.module.myaccounts\".*version=\"(\d*.\d*.\d*.\d*)\"', repo_xml.text)[0]
 			local_version = control.addonVersion()
 			if control.check_version_numbers(local_version, repo_version):
@@ -30,7 +29,7 @@ class AddonCheckUpdate:
 		except:
 			import traceback
 			traceback.print_exc()
-			pass
+
 
 class PremAccntNotification:
 	def run(self):

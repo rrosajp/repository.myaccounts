@@ -1,4 +1,8 @@
 
+[B][COLOR red]Update - v1.1.2 - Sept 19, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] You can now view, clear, and upload to pastebin the My Accounts log file.  See new settings under [B]"Options"[/B] category.[/I]
+[COLOR yellow]--[/COLOR][I] Changelog and Help file viewers have be switched to window xml's for clarity of viewing.[/I]
+
 [B][COLOR red]Update - v1.1.1 - June 18, 2021[/COLOR][/B]
 [COLOR yellow]--[/COLOR][I] Trakt improvements to account auth for better server error capturing.[/I]
 [COLOR yellow]--[/COLOR][I] Trakt expire duration was not properly saved to user settings.

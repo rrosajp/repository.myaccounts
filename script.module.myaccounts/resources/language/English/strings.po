@@ -23,7 +23,11 @@ msgstr ""
 
 msgctxt "#32073"
 msgid "[B]TRAKT[/B] : Authorize"
-msgstr "[B]TRAKT[/B]: Authorise"
+msgstr ""
+
+msgctxt "#32074"
+msgid "Are you sure?"
+msgstr ""
 
 msgctxt "#32306"
 msgid "Authorization..."
@@ -171,6 +175,26 @@ msgstr ""
 
 msgctxt "#32344"
 msgid "Password"
+msgstr ""
+
+msgctxt "#32345"
+msgid "Write My Accounts log in reverse order"
+msgstr ""
+
+msgctxt "#32346"
+msgid "Clear My Accounts log file"
+msgstr ""
+
+msgctxt "#32347"
+msgid "View My Accounts log file"
+msgstr ""
+
+msgctxt "#32348"
+msgid "Upload My Accounts log file to pastebin"
+msgstr ""
+
+msgctxt "#32349"
+msgid "My Accounts log file uploaded to:"
 msgstr ""
 
 msgctxt "#32369"
@@ -400,4 +424,3 @@ msgstr ""
 msgctxt "#40086"
 msgid "Account Expiry Notification"
 msgstr ""
-

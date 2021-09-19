@@ -95,3 +95,18 @@ elif action == 'ShowHelp':
 
 elif action == 'ShowOKDialog':
 	control.okDialog(params.get('title', 'default'), int(params.get('message', '')))
+
+elif action == 'tools_clearLogFile':
+	from myaccounts.modules import log_utils
+	cleared = log_utils.clear_logFile()
+	if cleared == 'canceled': pass
+	elif cleared: control.notification(message='My Accounts Log File Successfully Cleared')
+	else: control.notification(message='Error clearing My Accounts Log File, see kodi.log for more info')
+
+elif action == 'tools_viewLogFile':
+	from myaccounts.modules import log_utils
+	log_utils.view_LogFile(params.get('name'))
+
+elif action == 'tools_uploadLogFile':
+	from myaccounts.modules import log_utils
+	log_utils.upload_LogFile()
