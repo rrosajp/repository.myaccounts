@@ -184,12 +184,18 @@ class Trakt():
 			total_given_ratings = stats['ratings']['total']
 			movies_collected = stats['movies']['collected']
 			movies_watched = stats['movies']['watched']
-			movies_watched_minutes = ("{:0>8}".format(str(timedelta(minutes=stats['movies']['minutes'])))).split(', ')
+			movie_minutes = stats['movies']['minutes']
+			if movie_minutes == 0: movies_watched_minutes = ['0 days', '0:00:00']
+			elif movie_minutes < 1440: movies_watched_minutes = ['0 days', "{:0>8}".format(str(timedelta(minutes=movie_minutes)))]
+			else: movies_watched_minutes = ("{:0>8}".format(str(timedelta(minutes=movie_minutes)))).split(', ')
 			movies_watched_minutes = control.lang(40071) % (movies_watched_minutes[0], movies_watched_minutes[1].split(':')[0], movies_watched_minutes[1].split(':')[1])
 			shows_collected = stats['shows']['collected']
 			shows_watched = stats['shows']['watched']
 			episodes_watched = stats['episodes']['watched']
-			episodes_watched_minutes = ("{:0>8}".format(str(timedelta(minutes=stats['episodes']['minutes'])))).split(', ')
+			episode_minutes = stats['episodes']['minutes']
+			if episode_minutes == 0: episodes_watched_minutes = ['0 days', '0:00:00']
+			elif episode_minutes < 1440: episodes_watched_minutes = ['0 days', "{:0>8}".format(str(timedelta(minutes=episode_minutes)))]
+			else: episodes_watched_minutes = ("{:0>8}".format(str(timedelta(minutes=episode_minutes)))).split(', ')
 			episodes_watched_minutes = control.lang(40071) % (episodes_watched_minutes[0], episodes_watched_minutes[1].split(':')[0], episodes_watched_minutes[1].split(':')[1])
 			heading = control.lang(32315)
 			items = []

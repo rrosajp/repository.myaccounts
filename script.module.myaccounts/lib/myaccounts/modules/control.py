@@ -18,7 +18,6 @@ addonInfo = addonObject.getAddonInfo
 getLangString = xbmcaddon.Addon().getLocalizedString
 condVisibility = xbmc.getCondVisibility
 execute = xbmc.executebuiltin
-# jsonrpc = xbmc.executeJSONRPC
 monitor = xbmc.Monitor()
 transPath = xbmc.translatePath if getKodiVersion() < 19 else xbmcvfs.translatePath
 joinPath = os.path.join
